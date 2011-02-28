@@ -17,11 +17,11 @@ class MapPage extends Page {
 		'Map' => 'MapObject'
 	);
 	
-	static $css_map_page = 'mapping/css/MapPage.css';
+	static $css_map_page = '/css/MapPage.css';
 
-	static $css_map_bubble = 'mapping/css/layout.css';
+	static $css_map_bubble = '/css/layout.css';
 	
-	static $css_map_layerlist = 'mapping/css/LayerList.css';
+	static $css_map_layerlist = '/css/LayerList.css';
 	
 	static function get_css_map_page() {
 		return self::$css_map_page;
@@ -88,28 +88,28 @@ class MapPage_Controller extends Page_Controller {
 	function init() {
 		parent::init();
 
-		Requirements::javascript('mapping/thirdparty/jquery-1.4.4.min.js');
-		Requirements::javascript('mapping/thirdparty/jquery-ui-1.7.2.custom.min.js');
+		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery-1.4.4.min.js');
+		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery-ui-1.7.2.custom.min.js');
 
 
-		Requirements::javascript('mapping/thirdparty/jquery.entwine/dist/jquery.entwine-dist.js');
-		Requirements::javascript('mapping/thirdparty/jquery.metadata/jquery.metadata.js');
-		Requirements::javascript("mapping/thirdparty/openlayers_dev/lib/OpenLayers.js");
+		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery.entwine/dist/jquery.entwine-dist.js');
+		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery.metadata/jquery.metadata.js');
+		Requirements::javascript(MapObject::get_module_path()."/thirdparty/openlayers_dev/lib/OpenLayers.js");
 
-		Requirements::javascript("mapping/javascript/MapWrapper.js");
-		Requirements::javascript('mapping/javascript/LayerList.js');
-		Requirements::javascript("mapping/javascript/WMSFeatureInfo.js");
-		Requirements::javascript("mapping/javascript/WFSFeatureInfo.js");
-		Requirements::javascript("mapping/javascript/MapPopup.js");
+		Requirements::javascript(MapObject::get_module_path()."/javascript/MapWrapper.js");
+		Requirements::javascript(MapObject::get_module_path().'/javascript/LayerList.js');
+		Requirements::javascript(MapObject::get_module_path()."/javascript/WMSFeatureInfo.js");
+		Requirements::javascript(MapObject::get_module_path()."/javascript/WFSFeatureInfo.js");
+		Requirements::javascript(MapObject::get_module_path()."/javascript/MapPopup.js");
 
-		Requirements::javascript("mapping/javascript/control/GeoserverGetFeatureInfo.js");
+		Requirements::javascript(MapObject::get_module_path()."/javascript/control/GeoserverGetFeatureInfo.js");
 
-		Requirements::css('mapping/css/MapStyle.css');
-		Requirements::css(MapPage::get_css_map_page());
-		Requirements::css(MapPage::get_css_map_bubble());
+		Requirements::css(MapObject::get_module_path().'/css/MapStyle.css');
+		Requirements::css(MapObject::get_module_path()."/".MapPage::get_css_map_page());
+		Requirements::css(MapObject::get_module_path()."/".MapPage::get_css_map_bubble());
 		
 		if (MapPage::get_css_map_layerlist()) {
-			Requirements::css(MapPage::get_css_map_layerlist());
+			Requirements::css(MapObject::get_module_path()."/".MapPage::get_css_map_layerlist());
 		}
 		
 		// we need to add call to js maps somehow, any better way?

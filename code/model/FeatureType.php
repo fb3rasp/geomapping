@@ -82,7 +82,7 @@ class FeatureType extends DataObject {
 		$controller = Controller::curr();
 		$link = Controller::join_links($controller->Link());
 
-		Requirements::javascript('mapping/javascript/FeatureType.js');	
+		Requirements::javascript(MapObject::get_module_path().'javascript/FeatureType.js');	
 
 		$tableField = $this->getLabelTableField();
 		$fields->addFieldsToTab("Root.Labels", 

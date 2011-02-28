@@ -1,7 +1,7 @@
 
 /* Bubble */
 #Information { 
-	background: transparent url("../../mapping/images/bubble-top.png") no-repeat scroll 0 0 !important; 
+	background: transparent url("../../geomapping/images/bubble-top.png") no-repeat scroll 0 0 !important; 
 	width: 382px !important; 
 	position: relative; 
 	top: 315px; 
@@ -17,7 +17,7 @@
 }
 
 #Information .olPopupCloseBox { 
-	background: url("../../mapping/images/bubble_close_btn.png") no-repeat scroll 0 0 transparent !important; 
+	background: url("../../geomapping/images/bubble_close_btn.png") no-repeat scroll 0 0 transparent !important; 
 	right: 2px !important; 
 	top: -20px !important; 
 }
