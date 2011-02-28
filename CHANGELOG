@@ -1,0 +1,11 @@
+0.1.0
+	Released 27 February 2011
+	Initial commit of the mapping module
+	
+	Use thirdparty JavaScript libraries: 
+	
+	* jQuery 1.3.2, 
+	* jQuery UI 1.7.2, 
+	* jQuery Entwine, 
+	* jQuery Metadata,
+	* OpenLayers 2.10

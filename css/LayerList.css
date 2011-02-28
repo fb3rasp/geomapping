@@ -1,0 +1,54 @@
+.olLayerList {
+	color:#000;
+	
+	padding: 5px;
+	width: 250px;
+}
+
+.olLayerList * {
+	font-family:verdana;
+	font-size:12px;		
+}
+
+.layers {
+	padding: 0px;
+	margin: 0px;
+
+}
+	
+h2 {
+	color: #227199;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 2px 5px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+
+/*
+
+.olLayerList {
+	left: 0px;
+	top: 174px !important;
+	width: 250px	 !important;
+	bottom: 0px;
+	margin: 0px !important;
+	color: #000000;
+	overflow: hidden;
+}
+
+.olLayerList * {
+
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	font-weight: normal;
+	color: #000000;
+}
+
+.olLayerList {
+	background-color: #FFFFFF !important;
+}
+*/

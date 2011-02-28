@@ -1,0 +1,58 @@
+
+/* Bubble */
+#Information { 
+	background: transparent url("../../mapping/images/bubble-top.png") no-repeat scroll 0 0 !important; 
+	width: 382px !important; 
+	position: relative; 
+	top: 315px; 
+	padding-top: 33px; 
+	margin-left: -55px !important; 
+}
+
+#Information .bubbleTop { 
+	top: -19px !important; 
+	position: absolute; 
+	left: 10px; 
+	color: #6b6b6b; 
+}
+
+#Information .olPopupCloseBox { 
+	background: url("../../mapping/images/bubble_close_btn.png") no-repeat scroll 0 0 transparent !important; 
+	right: 2px !important; 
+	top: -20px !important; 
+}
+
+#Information #Information_GroupDiv { 
+	border: 2px solid #4f6a92; 
+	border-top: none; 
+	width: auto !important; 
+	overflow: visible !important; 
+	height: 281px !important; 
+}
+
+#Information #Information_GroupDiv .olPopupContent { 
+	padding-bottom: 0; 
+	background-color: white; 
+	width: auto !important; 
+	height: 281px !important; 
+}
+
+#Information #Information_GroupDiv #Information_contentDiv { 
+	padding: 0 !important; 
+	position: static !important;
+	width: 378px !important; 
+	*width: 378px !important; 
+}
+
+#Information #Information_GroupDiv #Information_contentDiv .featureInfoContent { 
+	padding: 10px; 
+	min-height: 261px; 
+}
+
+#Information #Information_GroupDiv #Information_contentDiv .featureInfoContent .bubbleData .bubbleDataBorder { 
+	border: 1px solid #f1f1f1; 
+	padding: 1px; 
+	margin-bottom: 6px; 
+}
+
+

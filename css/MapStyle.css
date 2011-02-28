@@ -1,0 +1,48 @@
+
+.sbuvmap {
+	border: 1px solid #CCC;
+	position: absolute;
+	left: 250px;
+	right: 0px;
+	top: 171px;
+	bottom: 0px;
+}
+
+div.olMap {
+	z-index: 0;
+    padding: 0px!important;
+    margin: 0px!important;
+    cursor: default;
+}
+
+.initmap {
+	background-image: url('../images/ajax-loader.gif');
+	background-repeat:no-repeat;
+	background-position: center center;
+}
+
+.ajaxLoading {
+	background-color:#FFFFFF;
+	border:1px solid #CCCCCC;
+	height:20px;
+	padding:2px;
+	position:absolute;
+	right:0;
+	top:171px;
+	width:190px;
+}
+
+.ajaxLoading_off {
+	z-index:-100;
+	display: none;
+}
+
+.ajaxLoading_on {
+	z-index:100;
+}
+
+.ajaxLoading img {
+	vertical-align: middle;
+	padding-left: 5px;
+	padding-right: 5px;
+}
