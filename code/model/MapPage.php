@@ -88,6 +88,12 @@ class MapPage_Controller extends Page_Controller {
 	function init() {
 		parent::init();
 
+		// Check that the class exists before trying to use it
+		if (!class_exists('CommandFactory')) {
+		    user_error('MapPage_Controller::init() - Please install the command-pattern module from github.com fb3rasp/commandpattern.git repository.');
+			die();
+		}
+
 		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery-1.4.4.min.js');
 		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery-ui-1.7.2.custom.min.js');
 
