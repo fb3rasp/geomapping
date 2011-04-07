@@ -20,3 +20,7 @@ to generate the required database schema.
 
 ## Known issues
 
+### License
+
+* Map Icons by Momenticons under the Creative Commons Attribution (by) license.
+  [ http://findicons.com/icon/261402/flag_blue?id=261402# ]

@@ -23,6 +23,24 @@ class Layer_GoogleMap extends Layer {
 	static $db = array(
 		'GMapTypeName' =>  "Enum(array('Satellite','Map','Terrain','Hybrid'),'Satellite')",
 	);
+
+	public function getCMSFields($params = null) {
+		$fields = parent::getCMSFields($parents);
+		
+		$fields->removeFieldFromTab("Root", "FeatureTypes");
+		$fields->removeFieldFromTab("Root.Main", "Queryable");
+		$fields->removeFieldFromTab("Root.Main", "Type");
+		return $fields;
+	}	
+
+
+	protected function onBeforeWrite() {
+		parent::onBeforeWrite();
+		
+		$this->Type = 'contextual';
+		return;
+	}
+		
 	
 	function getGMapType() {
 		return self::$gmap_types[$this->GMapTypeName];
@@ -30,5 +48,18 @@ class Layer_GoogleMap extends Layer {
 	
 	function getJavaScript() {
 		return $this->renderWith('JS_Layer_GoogleMap');
+	}
+	
+	function isSphericalMercator() {
+		
+		$retValue = false;
+		
+		if ($this->Map()) {
+			if ($this->Map()->Projection == 'EPSG:900913') {
+				$retValue = true;
+			}
+		}
+		
+		return $retValue;
 	}
 }

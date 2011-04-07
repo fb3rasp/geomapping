@@ -6,7 +6,7 @@
     var name = "Vector Layer";
     
     function test_Layer_Vector_constructor(t) {
-        t.plan(4);
+        t.plan(5);
 
         var options = {protocol: new OpenLayers.Protocol(), 
                        strategies: [new OpenLayers.Strategy(), new OpenLayers.Strategy()]}
@@ -19,6 +19,45 @@
         t.ok((layer.name == layer.strategies[0].layer.name) &&
              (layer.strategies[0].layer.name == layer.strategies[1].layer.name), 
              "setLayer was called on strategies");
+
+       options.renderers = [OpenLayers.Renderer.SVG, OpenLayers.Renderer.VML, OpenLayers.Renderer.Canvas]; 
+       layer.destroy(); 
+       layer = new OpenLayers.Layer.Vector(name, options); 
+       t.ok(layer.renderer.CLASS_NAME, "layer has a renderer when providing a function"); 
+       layer.destroy(); 
+    }
+
+    function test_Layer_Vector_assignRenderer(t) { 
+        t.plan(2);
+ 
+        // create a dummy class in the global name space 
+        My = { 
+            Custom: { 
+                Renderer: { 
+                    Supported: OpenLayers.Class(OpenLayers.Renderer, { 
+                        supported: OpenLayers.Function.True, 
+                        CLASS_NAME: 'My.Custom.Renderer.Supported' 
+                    }), 
+                    NotSupported: OpenLayers.Class(OpenLayers.Renderer, { 
+                        supported: OpenLayers.Function.False, 
+                        CLASS_NAME: 'My.Custom.Renderer.NotSupported' 
+                    }) 
+                } 
+            } 
+        }; 
+        var layer = new OpenLayers.Layer.Vector('vector', { 
+            renderers: [My.Custom.Renderer.NotSupported, 
+                My.Custom.Renderer.Supported, 
+                OpenLayers.Renderer.Canvas] 
+        }); 
+        t.eq(layer.renderer.CLASS_NAME, 'My.Custom.Renderer.Supported',  
+            'layer has a valid renderer'); 
+ 
+        var layer = new OpenLayers.Layer.Vector('vector', { 
+            renderers: ['SVG', 'VML', 'Canvas', My.Custom.Renderer.Supported] 
+        }); 
+        t.ok(layer.renderer.CLASS_NAME != 'My.Custom.Renderer.Supported',  
+            'renderers can be strings as well'); 
     }
 
     function test_Layer_Vector_refresh(t) {
@@ -113,6 +152,47 @@
 
         var extent = layer.getDataExtent();
         t.eq(extent.toBBOX(), "-111.04,45.68,-111.04,45.68", "extent from getDataExtent is correct");
+    }
+
+    function test_Layer_Vector_getFeature(t) {
+        t.plan(13);
+
+        var layer = new OpenLayers.Layer.Vector(name);
+        var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(-111.04, 45.68));
+
+        t.ok(layer.getFeatureById(feature.id) == null,
+             "OpenLayers.Layer.Vector.getFeatureById returns null while the layer is empty");
+        t.ok(layer.getFeatureByFid('my_fid') == null,
+             "OpenLayers.Layer.Vector.getFeatureByFid returns null while the layer is empty");
+
+        layer.addFeatures([feature]);
+
+        t.ok(layer.getFeatureByFid('my_fid') == null,
+             "OpenLayers.Layer.Vector.getFeatureByFid returns null on unset feature fid");
+
+        feature.fid = 'my_fid';
+
+        t.ok(layer.getFeatureById(feature.id) == feature,
+             "OpenLayers.Layer.Vector.getFeatureById returns the correct feature");
+        t.ok(layer.getFeatureByFid(feature.fid) == feature,
+             "OpenLayers.Layer.Vector.getFeatureByFid returns the correct feature");
+        t.ok(layer.getFeatureById('some_id_that_does_not_exist') == null,
+             "OpenLayers.Layer.Vector.getFeatureById returns null on non-existing feature id");
+        t.ok(layer.getFeatureByFid('some_fid_that_does_not_exist') == null,
+             "OpenLayers.Layer.Vector.getFeatureByFid returns null on non-existing feature fid");
+        t.ok(layer.getFeatureById(feature.fid) == null,
+             "OpenLayers.Layer.Vector.getFeatureById ignores the feature fid");
+        t.ok(layer.getFeatureByFid(feature.id) == null,
+             "OpenLayers.Layer.Vector.getFeatureByFid ignores the feature id");
+
+        t.ok(layer.getFeatureBy('id', feature.id) == feature,
+             "OpenLayers.Layer.Vector.getFeatureBy('id', ...) works like getFeatureById on existing feature id");
+        t.ok(layer.getFeatureBy('id', 'some_id_that_does_not_exist') == null,
+             "OpenLayers.Layer.Vector.getFeatureBy('id', ...) works like getFeatureById on non-existing feature id");
+        t.ok(layer.getFeatureBy('fid', feature.fid) == feature,
+             "OpenLayers.Layer.Vector.getFeatureBy('fid', ...) works like getFeatureByFid on existing feature fid");
+        t.ok(layer.getFeatureBy('fid', 'some_fid_that_does_not_exist') == null,
+             "OpenLayers.Layer.Vector.getFeatureBy('fid', ...) works like getFeatureByFid on non-existing feature fid");
     }
 
     function test_Layer_Vector_getDataExtent(t) {
@@ -373,12 +453,12 @@
     }
 
     function test_Layer_Vector_destroyFeatures (t) {
-        t.plan(5); 
-        layer = new OpenLayers.Layer.Vector(name);
+        t.plan(8);
+        var layer = new OpenLayers.Layer.Vector(name);
         var map = new OpenLayers.Map('map');
         map.addLayer(layer);
-        var features = [];
-        for (var i = 0; i < 5; i++) {
+        var features = [], i;
+        for (i = 0; i < 5; i++) {
             features.push(new OpenLayers.Feature.Vector(
                           new OpenLayers.Geometry.Point(0,0)));
         }
@@ -388,8 +468,15 @@
         layer.destroyFeatures();
         t.eq(layer.features.length, 0, "destroyFeatures triggers removal");
         t.eq(layer.selectedFeatures, [], "Destroy features removes selected features");
+        var allDestroyed = true;
+        for (i = 0; i < 5; i++) {
+            if(features[i].geometry) {
+                allDestroyed = false;
+            }
+        }
+        t.ok(allDestroyed, "destroyFeatures actually destroys features");
         features = [];
-        for (var i = 0; i < 5; i++) {
+        for (i = 0; i < 5; i++) {
             features.push(new OpenLayers.Feature.Vector(
                           new OpenLayers.Geometry.Point(0,0)));
         }
@@ -399,6 +486,8 @@
         layer.destroyFeatures([features[0], features[1]]);
         t.eq(layer.features.length, 3, "destroyFeatures removes appropriate features");
         t.eq(layer.selectedFeatures, [], "destroyFeatures removes appropriate selected features");
+        t.eq(features[0].geometry, null, "destroyFeatures destroys feature 0");
+        t.eq(features[1].geometry, null, "destroyFeatures destroys feature 1");
     }
 
     function test_Layer_Vector_destroy (t) {
@@ -600,6 +689,94 @@
 
         }
     }
+
+    function test_removeLayer_drawFeature(t) {
+        // test behaviour when features are redrawn while
+        // the layer has been removed from the map
+
+        t.plan(1);
+
+        // set up
+
+        var map, layer, feature;
+
+        map = new OpenLayers.Map("map");
+        map.addLayer(new OpenLayers.Layer("base", {isBaseLayer: true}));
+
+        layer = new OpenLayers.Layer.Vector("vector");
+        map.addLayer(layer);
+
+        map.zoomToMaxExtent();
+
+        feature = new OpenLayers.Feature.Vector(
+            new OpenLayers.Geometry.Point(1.0, 1.0));
+        layer.addFeatures(feature);
+
+        // test
+
+        map.removeLayer(layer);
+        layer.drawFeature(feature);
+        layer.drawFeature(feature);
+        map.addLayer(layer);
+
+        var count = 0, node;
+        while(node = document.getElementById(feature.geometry.id)) {
+            node.parentNode.removeChild(node);
+            count++;
+        }
+
+        t.eq(count, 1, "one geometry added, one geometry removed");
+
+        // tear down
+
+        map.destroy();
+    }
+
+    function test_vectorBeforeFeatureAddedVeto(t) {
+        t.plan( 4 );
+
+        var map = new OpenLayers.Map('map');
+        layer = new OpenLayers.Layer.Vector("");
+        map.addLayer(layer);
+        var feature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry(1.0, 1.0));
+        layer.addFeatures([feature]);
+
+        var addedFeatures = [];
+        var beforefeatureadded_veto = function(evt) { return false; };
+        layer.events.register("beforefeatureadded", layer, beforefeatureadded_veto);
+        layer.events.register("featuresadded", layer, function(evt) {
+            if (evt.features) {
+                for (var i = 0; i < evt.features.length; i++) {
+                    addedFeatures.push(evt.features[i]);
+                }
+            }
+        });
+
+        var blankFeatures = [
+            new OpenLayers.Feature.Vector(new OpenLayers.Geometry(1.0, 1.0)),
+            new OpenLayers.Feature.Vector(new OpenLayers.Geometry(1.0, 1.0))];
+        layer.addFeatures(blankFeatures);
+
+        t.eq(layer.features.length, 1,
+            "features not added to layer after beforefeatureadded veto");
+        t.eq(addedFeatures.length, 0,
+            "no features sent to featuresadded on feature veto");
+
+        addedFeatures = [];
+
+        layer.events.unregister("beforefeatureadded", layer, beforefeatureadded_veto);
+        beforefeatureadded_veto = function(evt) { return true; };
+        layer.events.register("beforefeatureadded", layer, beforefeatureadded_veto);
+
+        layer.addFeatures(blankFeatures);
+
+        t.eq(layer.features.length, 3,
+            "features added to layer as expected");
+        t.eq(addedFeatures.length, 2,
+            "featuresadded event received expected number of features");
+    }
+
+
 
   </script>
 </head>

@@ -124,7 +124,7 @@ class MapObject extends DataObject {
 			$layer->Visible = true;
 			$layer->Queryable = false;
 			$layer->Sort = 1;
-			$layer->LayerName = 'tiger-ny';
+			$layer->LayerName = 'tiger:giant_polygon,tiger:poly_landmarks,tiger:tiger_roads';
 			$layer->Format = 'image/png';
 			$layer->StorageID = $storage->ID;
 			$layer->MapID = $map->ID;
@@ -146,9 +146,9 @@ class MapObject extends DataObject {
 		
 			$style = new StyleMap();	
 			$style->Name = 'Point of Interests - Demo';
-			$style->default = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "http://mnps.org/googlemaps/images/blue.png" })';
-			$style->select = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "http://mnps.org/googlemaps/images/orange.png" })';
-			$style->temporary = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "http://mnps.org/googlemaps/images/orange.png" })';
+			$style->default = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
+			$style->select = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
+			$style->temporary = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
 			$style->write();
 
 			$layers = $style->WFSLayers();

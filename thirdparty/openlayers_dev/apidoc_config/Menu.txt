@@ -48,7 +48,6 @@ SubTitle: JavaScript Mapping Library
 Group: OpenLayers  {
 
    File: OpenLayers  (no auto-title, OpenLayers.js)
-   File: Ajax  (no auto-title, OpenLayers/Ajax.js)
 
    Group: BaseTypes  {
 
@@ -60,8 +59,6 @@ Group: OpenLayers  {
       File: Pixel  (no auto-title, OpenLayers/BaseTypes/Pixel.js)
       File: Size  (no auto-title, OpenLayers/BaseTypes/Size.js)
       }  # Group: BaseTypes
-
-   File: Console  (no auto-title, OpenLayers/Console.js)
 
    Group: Control  {
 
@@ -98,10 +95,12 @@ Group: OpenLayers  {
          File: Scale  (no auto-title, OpenLayers/Control/Scale.js)
          File: ScaleLine  (no auto-title, OpenLayers/Control/ScaleLine.js)
          File: SelectFeature  (no auto-title, OpenLayers/Control/SelectFeature.js)
+         File: SLDSelect  (OpenLayers/Control/SLDSelect.js)
          File: Snapping  (no auto-title, OpenLayers/Control/Snapping.js)
          File: Split  (no auto-title, OpenLayers/Control/Split.js)
          File: TransformFeature  (OpenLayers/Control/TransformFeature.js)
          File: WMSGetFeatureInfo  (OpenLayers/Control/WMSGetFeatureInfo.js)
+         File: WMTSGetFeatureInfo  (OpenLayers/Control/WMTSGetFeatureInfo.js)
          File: ZoomBox  (no auto-title, OpenLayers/Control/ZoomBox.js)
          File: ZoomIn  (no auto-title, OpenLayers/Control/ZoomIn.js)
          File: ZoomOut  (no auto-title, OpenLayers/Control/ZoomOut.js)
@@ -110,8 +109,6 @@ Group: OpenLayers  {
          }  # Group: Control
 
       }  # Group: Control
-
-   File: Events  (no auto-title, OpenLayers/Events.js)
 
    Group: Feature  {
 
@@ -202,6 +199,7 @@ Group: OpenLayers  {
          File: ArcXML  (no auto-title, OpenLayers/Format/ArcXML.js)
          File: ArcXML.Features  (no auto-title, OpenLayers/Format/ArcXML/Features.js)
          File: Atom  (no auto-title, OpenLayers/Format/Atom.js)
+         File: Context  (OpenLayers/Format/Context.js)
          File: CSWGetDomain.DEFAULTS  (no auto-title, OpenLayers/Format/CSWGetDomain.js)
          File: CSWGetDomain.v2_0_2  (no auto-title, OpenLayers/Format/CSWGetDomain/v2_0_2.js)
          File: CSWGetRecords.DEFAULTS  (no auto-title, OpenLayers/Format/CSWGetRecords.js)
@@ -212,7 +210,16 @@ Group: OpenLayers  {
          File: JSON  (no auto-title, OpenLayers/Format/JSON.js)
          File: KML  (no auto-title, OpenLayers/Format/KML.js)
          File: OSM  (no auto-title, OpenLayers/Format/OSM.js)
-         File: OWSCommon.v1_1_0  (OpenLayers/Format/OWSCommon/v1_1_0.js)
+
+         Group: OWSCommon  {
+
+            File: v1  (OpenLayers/Format/OWSCommon/v1.js)
+            File: v1_0_0  (OpenLayers/Format/OWSCommon/v1_0_0.js)
+            File: v1_1_0  (OpenLayers/Format/OWSCommon/v1_1_0.js)
+            }  # Group: OWSCommon
+
+         File: OWSContext  (OpenLayers/Format/OWSContext.js)
+         File: OWSContext.v0_3_1  (OpenLayers/Format/OWSContext/v0_3_1.js)
          File: SOSCapabilities  (OpenLayers/Format/SOSCapabilities.js)
          File: SOSCapabilities.v1_0_0  (OpenLayers/Format/SOSCapabilities/v1_0_0.js)
          File: SOSGetFeatureOfInterest  (OpenLayers/Format/SOSGetFeatureOfInterest.js)
@@ -222,6 +229,8 @@ Group: OpenLayers  {
          File: WFSDescribeFeatureType  (no auto-title, OpenLayers/Format/WFSDescribeFeatureType.js)
          File: WKT  (no auto-title, OpenLayers/Format/WKT.js)
          File: WMSGetFeatureInfo  (no auto-title, OpenLayers/Format/WMSGetFeatureInfo.js)
+         File: WMTSCapabilities  (OpenLayers/Format/WMTSCapabilities.js)
+         File: WMTSCapabilities.v1_0_0  (OpenLayers/Format/WMTSCapabilities/v1_0_0.js)
          File: XML  (no auto-title, OpenLayers/Format/XML.js)
          }  # Group: Format
 
@@ -257,8 +266,6 @@ Group: OpenLayers  {
       File: Polygon  (no auto-title, OpenLayers/Handler/Polygon.js)
       File: RegularPolygon  (no auto-title, OpenLayers/Handler/RegularPolygon.js)
       }  # Group: Handler
-
-   File: Icon  (no auto-title, OpenLayers/Icon.js)
 
    Group: Lang  {
 
@@ -346,12 +353,12 @@ Group: OpenLayers  {
          File: WorldWind  (no auto-title, OpenLayers/Layer/WorldWind.js)
          File: Yahoo  (no auto-title, OpenLayers/Layer/Yahoo.js)
          File: XYZ  (no auto-title, OpenLayers/Layer/XYZ.js)
+         File: Google/v3.js  (OpenLayers/Layer/Google/v3.js)
+         File: WMTS  (OpenLayers/Layer/WMTS.js)
          File: Zoomify  (OpenLayers/Layer/Zoomify.js)
          }  # Group: Layer
 
       }  # Group: Layer
-
-   File: Map  (no auto-title, OpenLayers/Map.js)
 
    Group: Marker  {
 
@@ -367,8 +374,6 @@ Group: OpenLayers  {
       File: Framed  (no auto-title, OpenLayers/Popup/Framed.js)
       File: FramedCloud  (no auto-title, OpenLayers/Popup/FramedCloud.js)
       }  # Group: Popup
-
-   File: Projection  (no auto-title, OpenLayers/Projection.js)
 
    Group: Protocol  {
 
@@ -408,21 +413,22 @@ Group: OpenLayers  {
       File: XMLHttpRequest  (no auto-title, OpenLayers/Request/XMLHttpRequest.js)
       }  # Group: Request
 
-   File: Rule  (no auto-title, OpenLayers/Rule.js)
-
    Group: Strategy  {
 
       File: Strategy  (no auto-title, OpenLayers/Strategy.js)
-      File: BBOX  (no auto-title, OpenLayers/Strategy/BBOX.js)
-      File: Cluster  (no auto-title, OpenLayers/Strategy/Cluster.js)
-      File: Fixed  (no auto-title, OpenLayers/Strategy/Fixed.js)
-      File: Paging  (no auto-title, OpenLayers/Strategy/Paging.js)
-      File: Refresh  (OpenLayers/Strategy/Refresh.js)
-      File: Save  (OpenLayers/Strategy/Save.js)
-      }  # Group: Strategy
 
-   File: Style  (no auto-title, OpenLayers/Style.js)
-   File: StyleMap  (no auto-title, OpenLayers/StyleMap.js)
+      Group: Strategy  {
+
+         File: BBOX  (no auto-title, OpenLayers/Strategy/BBOX.js)
+         File: Cluster  (no auto-title, OpenLayers/Strategy/Cluster.js)
+         File: Filter  (OpenLayers/Strategy/Filter.js)
+         File: Fixed  (no auto-title, OpenLayers/Strategy/Fixed.js)
+         File: Paging  (no auto-title, OpenLayers/Strategy/Paging.js)
+         File: Refresh  (OpenLayers/Strategy/Refresh.js)
+         File: Save  (OpenLayers/Strategy/Save.js)
+         }  # Group: Strategy
+
+      }  # Group: Strategy
 
    Group: Tile  {
 
@@ -432,8 +438,33 @@ Group: OpenLayers  {
       File: IFrame  (OpenLayers/Tile/Image/IFrame.js)
       }  # Group: Tile
 
-   File: Tween  (no auto-title, OpenLayers/Tween.js)
-   File: Util  (no auto-title, OpenLayers/Util.js)
+   Group: OpenLayers  {
+
+      File: Ajax  (no auto-title, OpenLayers/Ajax.js)
+      File: Console  (no auto-title, OpenLayers/Console.js)
+      File: Events  (no auto-title, OpenLayers/Events.js)
+      File: Icon  (no auto-title, OpenLayers/Icon.js)
+      File: Map  (no auto-title, OpenLayers/Map.js)
+      File: Projection  (no auto-title, OpenLayers/Projection.js)
+      File: Rule  (no auto-title, OpenLayers/Rule.js)
+      File: Style  (no auto-title, OpenLayers/Style.js)
+      File: Style2  (OpenLayers/Style2.js)
+      File: StyleMap  (no auto-title, OpenLayers/StyleMap.js)
+      File: Symbolizer  (OpenLayers/Symbolizer.js)
+
+      Group: Symbolizer  {
+
+         File: Line  (OpenLayers/Symbolizer/Line.js)
+         File: Point  (OpenLayers/Symbolizer/Point.js)
+         File: Polygon  (OpenLayers/Symbolizer/Polygon.js)
+         File: Raster  (OpenLayers/Symbolizer/Raster.js)
+         File: Text  (OpenLayers/Symbolizer/Text.js)
+         }  # Group: Symbolizer
+
+      File: Tween  (no auto-title, OpenLayers/Tween.js)
+      File: Util  (no auto-title, OpenLayers/Util.js)
+      }  # Group: OpenLayers
+
    }  # Group: OpenLayers
 
 Group: Index  {

@@ -169,7 +169,6 @@ class Feature_Controller extends Controller {
 		
 		$commands = $this->getActions($layers, $action);
 		$results = array();
-		
 		foreach($commands as $id => $item) {
 			$commandName = $item['Action'];
 			// initiate command parameters for the WMS-GetFeatureInfo request
@@ -220,8 +219,6 @@ class Feature_Controller extends Controller {
 		return $vData->renderWith( self::get_template_name($action) );
 	}	
 	
-	
-
 	/**
 	 * Processes params and finds if request is for a single or multiple stations.
 	 * if single station calls renderSingleStation method with station and layers values
@@ -250,7 +247,7 @@ class Feature_Controller extends Controller {
 		$featureStructure = explode(".", $featureIDs); 
 		
 		if(count($featureStructure) <= 1) {
-			throw new Feature_Controller_Exception('Invalid FeatureID structure.');
+			throw new Feature_Controller_Exception('Invalid feature-ID structure.');
 		}
 		$featureType = Convert::raw2sql($featureStructure[0]);
 		$featureTypeID = Convert::raw2sql($featureStructure[1]);
@@ -268,8 +265,9 @@ class Feature_Controller extends Controller {
 		
 		$commandName = $layer->getActionName($action);
 		$cmd = $this->getCommand($commandName, $data);
+
 		$result = $cmd->execute();
-		
+
 		$viewableData = new ViewableData();
 		$obj = new DataObjectSet();
 		

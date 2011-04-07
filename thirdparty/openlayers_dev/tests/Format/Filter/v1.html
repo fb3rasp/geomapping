@@ -3,6 +3,54 @@
     <script src="../../../lib/OpenLayers.js"></script>
     <script type="text/javascript">
     
+    function test_PropertyIsBetween(t) {
+
+        t.plan(6);
+
+        var test_wml, parser, xml;
+
+        parser = new OpenLayers.Format.Filter.v1();
+        xml = new OpenLayers.Format.XML();
+
+        test_xml =
+            '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">' +
+                '<ogc:PropertyIsBetween>' +
+                    '<ogc:PropertyName>number</ogc:PropertyName>' +
+                    '<ogc:LowerBoundary>' +
+                        '<ogc:Literal>0</ogc:Literal>' +
+                    '</ogc:LowerBoundary>' +
+                    '<ogc:UpperBoundary>' +
+                        '<ogc:Literal>100</ogc:Literal>' +
+                    '</ogc:UpperBoundary>' +
+                '</ogc:PropertyIsBetween>' +
+            '</ogc:Filter>';
+
+        var filter = parser.read(xml.read(test_xml).documentElement);
+        t.eq(filter.type, OpenLayers.Filter.Comparison.BETWEEN,
+             "[0] read correct type");
+        t.eq(filter.lowerBoundary, 0,
+             "[0] record correct lower boundary value");
+        t.eq(filter.upperBoundary, 100,
+             "[0] record correct upper boundary value");
+
+        test_xml =
+            '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">' +
+                '<ogc:PropertyIsBetween>' +
+                    '<ogc:PropertyName>number</ogc:PropertyName>' +
+                    '<ogc:LowerBoundary>0</ogc:LowerBoundary>' +
+                    '<ogc:UpperBoundary>100</ogc:UpperBoundary>' +
+                '</ogc:PropertyIsBetween>' +
+            '</ogc:Filter>';
+
+        var filter = parser.read(xml.read(test_xml).documentElement);
+        t.eq(filter.type, OpenLayers.Filter.Comparison.BETWEEN,
+             "[1] read correct type");
+        t.eq(filter.lowerBoundary, 0,
+             "[1] record correct lower boundary value");
+        t.eq(filter.upperBoundary, 100,
+             "[1] record correct upper boundary value");
+    }
+
 
     function test_Intersects(t) {
         
