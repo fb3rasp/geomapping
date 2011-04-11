@@ -94,30 +94,31 @@ class MapPage_Controller extends Page_Controller {
 			die();
 		}
 
-		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery-1.4.4.min.js');
-		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery-ui-1.7.2.custom.min.js');
+		Requirements::combine_files('library.js',array(
+			MapObject::get_module_path().'/thirdparty/jquery-1.4.4.min.js',
+			MapObject::get_module_path().'/thirdparty/jquery-ui-1.7.2.custom.min.js',
+			MapObject::get_module_path().'/thirdparty/jquery.entwine/dist/jquery.entwine-dist.js',
+			MapObject::get_module_path().'/thirdparty/jquery.metadata/jquery.metadata.js',
+		));
 
-
-		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery.entwine/dist/jquery.entwine-dist.js');
-		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery.metadata/jquery.metadata.js');
 		Requirements::javascript(MapObject::get_module_path()."/thirdparty/openlayers_dev/OpenLayers.js");
 
-		Requirements::javascript(MapObject::get_module_path()."/javascript/MapWrapper.js");
-		Requirements::javascript(MapObject::get_module_path().'/javascript/LayerList.js');
-		Requirements::javascript(MapObject::get_module_path()."/javascript/WMSFeatureInfo.js");
-		Requirements::javascript(MapObject::get_module_path()."/javascript/WFSFeatureInfo.js");
-		Requirements::javascript(MapObject::get_module_path()."/javascript/MapPopup.js");
+		Requirements::combine_files('mapper.js',array(
+			MapObject::get_module_path()."/javascript/MapWrapper.js",
+			MapObject::get_module_path().'/javascript/LayerList.js',
+			MapObject::get_module_path()."/javascript/WMSFeatureInfo.js",
+			MapObject::get_module_path()."/javascript/WFSFeatureInfo.js",
+			MapObject::get_module_path()."/javascript/MapPopup.js",
+			MapObject::get_module_path()."/javascript/control/GeoserverGetFeatureInfo.js"
+		));
 
-		Requirements::javascript(MapObject::get_module_path()."/javascript/control/GeoserverGetFeatureInfo.js");
+		Requirements::combine_files('mapper.css',array(
+			MapObject::get_module_path().'/css/MapStyle.css',
+			MapObject::get_module_path()."/".MapPage::get_css_map_page(),
+			MapObject::get_module_path()."/".MapPage::get_css_map_bubble(),
+			MapObject::get_module_path()."/".MapPage::get_css_map_layerlist(),
+		));
 
-		Requirements::css(MapObject::get_module_path().'/css/MapStyle.css');
-		Requirements::css(MapObject::get_module_path()."/".MapPage::get_css_map_page());
-		Requirements::css(MapObject::get_module_path()."/".MapPage::get_css_map_bubble());
-		
-		if (MapPage::get_css_map_layerlist()) {
-			Requirements::css(MapObject::get_module_path()."/".MapPage::get_css_map_layerlist());
-		}
-		
 		// we need to add call to js maps somehow, any better way?
 		$googleCheck = DataObject::get_one('Layer_GoogleMap',"MapID = ".$this->MapID." AND \"Enabled\" = 1");
 		if($googleCheck){
