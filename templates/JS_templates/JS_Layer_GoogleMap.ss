@@ -3,10 +3,12 @@ var options = [];
 
 // current assumption: if google maps layers are used, 
 // we always use sphericalMercator.
+
 layer = new OpenLayers.Layer.Google(
 	"$GMapTypeName",
 	$.extend({
-		type: $GMapType, sphericalMercator: true, numZoomLevels: 22
+		type: $GMapType, <% if isSphericalMercator %>sphericalMercator: true,<% end_if %> numZoomLevels: 22,
+     	maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
 	}, options, {})
 );
 
