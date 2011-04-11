@@ -13,7 +13,6 @@ var p = new OpenLayers.Protocol.WFS({
 	url: "$Storage.URL_WFS",
  	featurePrefix: '$Namespace',
 	featureType: '$FeatureType',
-	<% if Projection %>projection: new OpenLayers.Projection("$Projection"),<% end_if %>
 	<% if Version %>version: "$Version"<% end_if %>
 });			
 
@@ -28,6 +27,7 @@ layer = new OpenLayers.Layer.Vector("$Title", {
 	styleMap: styles,
 	strategies: strategies,
 	protocol: p,
+	<% if Projection %>projection: new OpenLayers.Projection("$Projection"),<% end_if %>
 	queryable: $isQueryable 
 });
 
