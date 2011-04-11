@@ -94,7 +94,7 @@ class MapPage_Controller extends Page_Controller {
 
 		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery.entwine/dist/jquery.entwine-dist.js');
 		Requirements::javascript(MapObject::get_module_path().'/thirdparty/jquery.metadata/jquery.metadata.js');
-		Requirements::javascript(MapObject::get_module_path()."/thirdparty/openlayers_dev/lib/OpenLayers.js");
+		Requirements::javascript(MapObject::get_module_path()."/thirdparty/openlayers_dev/OpenLayers.js");
 
 		Requirements::javascript(MapObject::get_module_path()."/javascript/MapWrapper.js");
 		Requirements::javascript(MapObject::get_module_path().'/javascript/LayerList.js');
