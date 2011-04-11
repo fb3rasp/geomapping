@@ -6,8 +6,11 @@
 			ControllerName: 'Feature', 
 			<% control Map %>
  			MapID: '$ID', 
+			
 			Resolutions : $GetResolutionsAsJSON,
+			
 			Projection : new OpenLayers.Projection('$Projection'),
+			
 			<% end_control %>
 			initLayers: function() {
 				var self = this;
