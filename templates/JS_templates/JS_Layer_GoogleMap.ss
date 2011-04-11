@@ -7,8 +7,10 @@ var options = [];
 layer = new OpenLayers.Layer.Google(
 	"$GMapTypeName",
 	$.extend({
-		type: $GMapType, <% if isSphericalMercator %>sphericalMercator: true,<% end_if %> numZoomLevels: 22,
-     	maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34)
+		type: $GMapType, 
+		numZoomLevels: 22,
+     	maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+		<% if isSphericalMercator %>sphericalMercator: true<% end_if %> 
 	}, options, {})
 );
 
