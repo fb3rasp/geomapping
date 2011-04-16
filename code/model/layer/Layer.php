@@ -22,6 +22,14 @@ class Layer extends DataObject {
 		"Sort" => "Int"
 	);
 
+	static $summary_fields = array(
+		'Enabled',
+		'Title',
+		'Type',
+		'Map.Title',
+		'LayerCategory.Title'
+	);
+
 	static $has_one = array(
 		'Map' => 'MapObject',
 		'LayerCategory' => 'LayerCategory'
