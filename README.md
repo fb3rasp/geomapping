@@ -7,7 +7,7 @@
 ## Requirements
 
  * SilverStripe V2.4
- * CommandPattern module (svn://svn.silverstripe.com/silverstripe/modules/commands/trunk)
+ * CommandPattern module git@github.com:silverstripe-labs/silverstripe-commandpattern.git)
 
 ## Documentation
 
@@ -19,6 +19,10 @@ to generate the required database schema.
 ## Usage Overview
 
 ## Known issues
+
+- jQuery compatibility problems. Entwine causes JS errors with min-jQuery version.
+- jQuery outdated
+- WMS - get feature info handling
 
 ### License
 

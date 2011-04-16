@@ -90,7 +90,7 @@ class MapPage_Controller extends Page_Controller {
 
 		// Check that the class exists before trying to use it
 		if (!class_exists('CommandFactory')) {
-		    user_error('MapPage_Controller::init() - Please install the command-pattern module from github.com fb3rasp/commandpattern.git.');
+		    user_error('MapPage_Controller::init() - Please install the command-pattern module from github: git@github.com:silverstripe-labs/silverstripe-commandpattern.git.');
 			die();
 		}
 
