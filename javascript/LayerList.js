@@ -1,5 +1,4 @@
 (function($) {
-	
 	$.entwine('ol', function($) {	
 
 		$('.olLayerList h2.category').entwine({
@@ -11,11 +10,13 @@
 			onclick: function() {
 				this.next().slideToggle("fast");
 			},
+			
 			// highlight (color)
 			onmouseenter: function(){
 				this.animate({backgroundColor: this.getHighlight()}, 
 					{duration: 50, queue: false});
 			},
+			
 			// reset highlight (color)
 			onmouseleave: function(){
 				this.animate({backgroundColor: this.getBackground()}, 
@@ -25,6 +26,7 @@
 		
 		$('.olLayerList ul.layers li').entwine({
 			Highlight: '#BBCCEE',
+			
 			Background: '#FEFEFE',
 		
 			onmouseenter: function(){
@@ -43,6 +45,11 @@
 		});
 		
 		$(".olLayerList form input:checkbox").entwine({
+
+			getMap: function() {
+				return $('.olMap:first');
+			},
+			
 			onclick: function(event) {
 				event.stopPropagation();
 				this.setLayerVisibility(this.attr('checked'));
@@ -81,13 +88,7 @@
 			 */
 			hideLayer: function() {
 				setLayerVisibility(false);
-			},
-		
-		
-			getMap: function() {
-				return $('.olMap:first');
-			}
-			
+			}			
 		});
 	});
 }(jQuery));

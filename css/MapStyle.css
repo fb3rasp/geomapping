@@ -1,24 +1,22 @@
 
-.sbuvmap {
-	border: 1px solid #CCC;
-	position: absolute;
-	left: 250px;
-	right: 0px;
-	top: 171px;
-	bottom: 0px;
-}
 
 div.olMap {
 	z-index: 0;
     padding: 0px!important;
     margin: 0px!important;
     cursor: default;
+
+	background-color: #F0F0F0;
+	float: left;
+	width:450px;
+	height:440px;
 }
 
 .initmap {
 	background-image: url('../../geomapping/images/ajax-loader.gif');
 	background-repeat:no-repeat;
 	background-position: center center;
+	background-color: #ddd;	
 }
 
 .ajaxLoading {

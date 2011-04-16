@@ -90,27 +90,35 @@ class MapPage_Controller extends Page_Controller {
 
 		// Check that the class exists before trying to use it
 		if (!class_exists('CommandFactory')) {
-		    user_error('MapPage_Controller::init() - Please install the command-pattern module from github.com fb3rasp/commandpattern.git repository.');
+		    user_error('MapPage_Controller::init() - Please install the command-pattern module from github.com fb3rasp/commandpattern.git.');
 			die();
 		}
 
-		Requirements::combine_files('library.js',array(
-			MapObject::get_module_path().'/thirdparty/jquery-1.4.4.min.js',
+		$js_files = array(
+			'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js',
 			MapObject::get_module_path().'/thirdparty/jquery-ui-1.7.2.custom.min.js',
 			MapObject::get_module_path().'/thirdparty/jquery.entwine/dist/jquery.entwine-dist.js',
 			MapObject::get_module_path().'/thirdparty/jquery.metadata/jquery.metadata.js',
-		));
+		);
+
+		foreach($js_files as $file) {
+			Requirements::javascript($file);
+		}
 
 		Requirements::javascript(MapObject::get_module_path()."/thirdparty/openlayers_dev/OpenLayers.js");
 
-		Requirements::combine_files('mapper.js',array(
+		$js_files = array(
 			MapObject::get_module_path()."/javascript/MapWrapper.js",
 			MapObject::get_module_path().'/javascript/LayerList.js',
 			MapObject::get_module_path()."/javascript/WMSFeatureInfo.js",
 			MapObject::get_module_path()."/javascript/WFSFeatureInfo.js",
 			MapObject::get_module_path()."/javascript/MapPopup.js",
 			MapObject::get_module_path()."/javascript/control/GeoserverGetFeatureInfo.js"
-		));
+		);
+		foreach($js_files as $file) {
+			Requirements::javascript($file);
+		}
+		// Requirements::combine_files('mapper.js', $js_files);
 
 		Requirements::combine_files('mapper.css',array(
 			MapObject::get_module_path().'/css/MapStyle.css',
@@ -130,34 +138,44 @@ class MapPage_Controller extends Page_Controller {
 		$jscript = $page->getJavaScript();
 		Requirements::customScript($jscript);
 	}	
-	
+
+
 	/**
-	 * Overload the map getter from the datamodel
-	 * to inject visible states for layers based on GET parameters.
 	 */
-	function Categories() {
+	function getCategoriesByLayerType($layertype) {
 		$map = $this->dataRecord->Map();
 		$categories = $map->getCategories();
+		$retValue = new DataObjectSet();
 
-		// Optionally set layer visible state from GET params
-		$selectedLayerIds = explode(',', $this->request->getVar('layers'));
-		if($categories) foreach($categories as $category) {
-			$layers = $category->getOverlayLayersEnabled();
-			if($layers) foreach($layers as $layer) {
-			//	$layer->Visible = true; 
-				// (
-				// 	in_array($layer->ogc_name, $selectedLayerIds) 
-				// 	// Only default to Visible database setting if 'layers' GET param isnt defined.
-				// 	// Otherwise we assume the user wants to override these defaults.
-				// 	|| ($layer->Visible && !$selectedLayerIds)
-				// );
-//				echo $layer->Title ." : ". $layer->isVisible();
+		if($categories) {
+			foreach($categories as $category) {
+ 				$layers = $category->getEnabledLayers($layertype);
+				if ($layers->Count()) {
+					$category->layers = $layers;
+					$retValue->push($category);
+				}
 			}
-			// Works by object reference, so is accessible in the template
-			$category->OverlayLayersEnabledAndVisible = $layers;
 		}
 
-		return $categories;
+		return $retValue;
+	}
+
+	/**
+	 */
+	function getOverlayCategories() {
+		return $this->getCategoriesByLayerType('overlay');
+	}
+
+	/**
+	 */
+	function getBackgroundCategories() {
+		return $this->getCategoriesByLayerType('background');
+	}	
+	
+	/**
+	 */
+	function getContextualCategories() {
+		return $this->getCategoriesByLayerType('contextual');
 	}
 	
 	/**

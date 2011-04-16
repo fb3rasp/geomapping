@@ -6,7 +6,7 @@
 
 /**
  * 
- *
+ * 
  * @package mapping
  * @subpackage model
  * @author Rainer Spittel (rainer at silverstripe dot com)
@@ -30,9 +30,15 @@ class LayerCategory extends DataObject {
 	
 	static $plural_name = 'Categories';
 	
+	/** 
+	 * Customise getCMSFields.
+	 *
+	 * @return FieldSet
+	 */
 	function getCMSFields() {
 		$fields = parent::getCMSFields();
 		
+		// make the complex table field for layers read only.
 		$layersCTF = $fields->dataFieldByName('Layers');
 		if ($layersCTF) {
 			$layersCTF->setPermissions(array('show'));
@@ -41,14 +47,15 @@ class LayerCategory extends DataObject {
 	}
 
 	/**
-	 * @return ComponentSet
+	 * @return DataObjectSet
 	 */
-	function getOverlayLayersEnabled() {
-		return $this->getComponents('Layers', '"Enabled" = 1 AND "Type" = \'overlay\'','"Sort" ASC');
+	function getEnabledLayers($layertype) {
+		return $this->getComponents('Layers', '"Enabled" = 1 AND "Type" = \''.Convert::raw2sql($layertype).'\'','"Sort" ASC');
 	}
 
 	/**
-	 * Really just a temporary helper to make the filenames in our test data more readable.
+	 * A temporary helper METHOD to make the filenames in our test data 
+	 * more readable.
 	 * 
 	 * @return String
 	 */
