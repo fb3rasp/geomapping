@@ -40,6 +40,7 @@
 		
 			onclick: function() {
 				this.find(':checkbox').toggleLayerVisibility();
+				this.find(':radio').setLayerVisibility();
 			}
 					
 		});
@@ -74,6 +75,48 @@
 				var checked = !this.attr('checked');
 				this.attr('checked',checked);
 				this.setLayerVisibility(checked);
+			},
+		
+			/** 
+			 * Update visibility of the selected layer.
+			 */
+			showLayer: function() {
+				setLayerVisibility(true);
+			},
+		
+			/** 
+			 * Update visibility of the selected layer.
+			 */
+			hideLayer: function() {
+				setLayerVisibility();
+			}			
+		});
+
+		$(".olLayerList form input:radio").entwine({
+
+			getMap: function() {
+				return $('.olMap:first');
+			},
+			
+			onclick: function(event) {
+				event.stopPropagation();
+				this.setLayerVisibility();
+			},	
+		
+			/** 
+			 * Update visibility of the selected layer.
+			 */
+			setLayerVisibility: function() {
+				var map = this.getMap().getOLMap();
+		
+				var name = this.parent().attr('layer');
+				var layers = map.getLayersByName(name);
+			
+				if (layers.length > 0) {
+					this.attr('checked',true);
+					var layer = layers[0];
+					map.setBaseLayer(layer);
+				}
 			},
 		
 			/** 
