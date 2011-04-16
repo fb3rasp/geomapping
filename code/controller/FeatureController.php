@@ -97,9 +97,9 @@ class Feature_Controller extends Controller {
 	 * This method creates a Sapphire ORM data model for the returned OGC
 	 * features and maps those to the data objects stored in the CMS.
 	 *
-	 * @params $features array 
+	 * @param $features array 
 	 *
-	 * @returns DataObjectSet
+	 * @return DataObjectSet
 	 */
 	public function mapOGC2ORM($features) {
 		$response = new DataObjectSet();
@@ -243,19 +243,20 @@ class Feature_Controller extends Controller {
 		
 		$output = "Sorry we cannot retrieve feature information, please try again.";
 
-		// determin the layer 
+		// Determin the layer (The string has a structure like: featureType.featureID)
+		// We use the featureType to determin the layer object, used to send
+		// the get feature request.
 		$featureStructure = explode(".", $featureIDs); 
 		
 		if(count($featureStructure) <= 1) {
 			throw new Feature_Controller_Exception('Invalid feature-ID structure.');
 		}
 		$featureType = Convert::raw2sql($featureStructure[0]);
-		$featureTypeID = Convert::raw2sql($featureStructure[1]);
 
 		$layer = DataObject::get_one('Layer',sprintf("FeatureType = '%s' AND MapID = '%s'",$featureType,$mapID));
 		
 		if (!$layer) {
-			throw new Feature_Controller_Exception(sprintf("Unknown featuretype: '%s'",$featureType));
+			throw new Feature_Controller_Exception(sprintf("Unknown feature type: '%s'",$featureType));
 		}
 
 		$data = array(
