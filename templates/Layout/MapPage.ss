@@ -3,11 +3,12 @@
 $Content
 
 <hr />
-<h3>This is the map</h3>
-<hr />
 
 <!-- This example tempate fits with black-candy well-->
-<div id="map" class="olMap" style="width:750px;height:450px">
+<div id="layerlist" style="width:300px;height:400px;float:left">
+<% include LayerList %>
 </div>	
 
-<hr />
+<div id="map" class="olMap initmap" style="">
+</div>	
+

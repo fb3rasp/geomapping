@@ -5,7 +5,7 @@ var options = [];
 // we always use sphericalMercator.
 
 layer = new OpenLayers.Layer.Google(
-	"$GMapTypeName",
+	"$ID",
 	$.extend({
 		type: $GMapType, 
 		numZoomLevels: 22,

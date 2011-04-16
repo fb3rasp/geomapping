@@ -1,5 +1,6 @@
 
 <div id="olLayerList" class="olLayerList">
+
 	<% cached CategoriesCacheKey %> 
 	<form>
 		<% if OverlayCategories.Count %>
@@ -9,7 +10,7 @@
 		<ul class='layers'>
 			<% control layers %>
 			<li layer="$ID">
-				<input type='checkbox' class="checkbox" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
+				<input type='checkbox' class="" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
 				<label for="$Title.ATT">
 					<span class="title">$TitleNice</span>
 				</label>
@@ -26,7 +27,7 @@
 		<ul class='layers'>
 			<% control layers %>
 			<li layer="$ID">
-				<input type='checkbox' class="checkbox" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
+				<input type='checkbox' class="" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
 				<label for="$Title.ATT">
 					<span class="title">$TitleNice</span>
 				</label>
@@ -43,7 +44,7 @@
 		<ul class='layers'>
 			<% control layers %>
 			<li layer="$ID">
-				<input type='checkbox' class="checkbox" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
+				<input type='radio' class="" name='baselayer' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
 				<label for="$Title.ATT">
 					<span class="title">$TitleNice</span>
 				</label>
