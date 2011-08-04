@@ -9,7 +9,8 @@ layer = new OpenLayers.Layer.TMS(
     {
         type: 'png', getURL: osm_getTileURL,
         displayOutsideMaxExtent: true,
-        attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>'
+        attribution: '<a href="http://www.openstreetmap.org/">OpenStreetMap</a>',
+		wrapDateLine: true
     }
 );
 		
@@ -32,7 +33,7 @@ function osm_getTileURL(bounds) {
     var limit = Math.pow(2, z);
 
     if (y < 0 || y >= limit) {
-        return OpenLayers.Util.getImagesLocation() + "404.png";
+        return OpenLayers.Util.getImagesLocation() + "404_tile.png";
     } else {
         x = ((x % limit) + limit) % limit;
         return this.url + z + "/" + x + "/" + y + "." + this.type;
