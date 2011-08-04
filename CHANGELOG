@@ -1,3 +1,15 @@
+0.1.1
+	Released 04 August 2011
+	Initial commit of the mapping module
+	
+	CHANGELOG:
+		* MERGED OpenStreetMap support
+		* Abstracted MapPage and use Decorator pattern to 
+		  extend any page type to add map ability to any
+		  existing page time
+		* BUGFIX: a number of IE7 and IE8 issues have been fixed in the JavaScript code base.
+		* Upgrade jQuery to 1.4.2 and UI to 1.7.2 (custom build).
+
 0.1.0
 	Released 27 February 2011
 	Initial commit of the mapping module
