@@ -15,8 +15,6 @@ class MapObject extends DataObject {
 
 	static $create_demo_map = true;
 
-	static $module_path = 'geomapping';
-
 	static $db = array(
 		"Title" => "Varchar(255)",
 		"Enabled" => "Boolean",
@@ -38,14 +36,6 @@ class MapObject extends DataObject {
 
 	static function get_create_demo_map() {
 		return self::$create_demo_map;
-	}
-
-	static function set_module_path($value) {
-		self::$module_path = $value;
-	}
-
-	static function get_module_path() {
-		return self::$module_path;
 	}
 
 	function getCMSFields() {
