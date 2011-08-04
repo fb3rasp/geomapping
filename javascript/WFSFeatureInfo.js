@@ -38,7 +38,7 @@
 				var selectcontrol = new OpenLayers.Control.SelectFeature(layers, 
 					{
 						onSelect: function(feature) { return self.featureSelect(this, feature); }, 
-						onUnselect: function(feature) { return self.featureUnselect(this, feature); },
+						onUnselect: function(feature) { return self.featureUnselect(this, feature); }
 					}
 				);
 
