@@ -8,3 +8,6 @@ Director::addRules(100, array(
 Proxy_Controller::set_allowed_host(array(
 	'localhost:8080'
 ));
+
+DataObject::add_extension('MapPage', 'MapPageDecorator');
+Object::add_extension('MapPage_Controller', 'MapControllerExtension');
