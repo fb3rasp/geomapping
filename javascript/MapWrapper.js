@@ -8,6 +8,13 @@
 			// Only applies to Google layers, which in turn set the map to OpenLayers.FixedZoomLevels
 			MinZoomLevel: 3, 
 			
+			createControls: function(map) {
+				map.addControl(new OpenLayers.Control.Navigation());
+				map.addControl(new OpenLayers.Control.PanZoomBar());
+				map.addControl(new OpenLayers.Control.KeyboardDefaults());
+				map.addControl(new OpenLayers.Control.MousePosition());
+			},
+			
 			/**
 			 * Initialise the open layers map instance and uses a div object which
 			 * must exist in the DOM. 
@@ -35,11 +42,9 @@
 				};
 				
 				var map = new OpenLayers.Map(this[0], mapOptions);
-				map.addControl(new OpenLayers.Control.Navigation());
-				map.addControl(new OpenLayers.Control.PanZoomBar());
-				map.addControl(new OpenLayers.Control.KeyboardDefaults());
-				map.addControl(new OpenLayers.Control.MousePosition());
 				
+				this.createControls(map);
+
 				this.setOLMap(map);
 				
 				this.initLayers();
