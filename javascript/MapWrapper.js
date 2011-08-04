@@ -73,7 +73,7 @@
 				$('.initmap').removeClass('initmap');
 				$('.ajaxLoading').addClass('ajaxLoading_off');
 				$('.ajaxLoading').removeClass('ajaxLoading_on');
-			},
+			}
 			
 		});
 	});
