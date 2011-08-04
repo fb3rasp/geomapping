@@ -28,7 +28,7 @@ to generate the required database schema.
 * Map Icons by Momenticons under the Creative Commons Attribution (by) license.
   [ http://findicons.com/icon/261402/flag_blue?id=261402# ]
 
-* Third-party libraries: OpenLayers
+* Third-party libraries: OpenLayers v2.10
 
 * Third-party libraries: jQuery, jQuery-UI, jQuery-metadata
 
