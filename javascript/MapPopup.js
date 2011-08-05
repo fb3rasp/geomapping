@@ -46,7 +46,7 @@
 				}
 				
 				// popup temporary content while we load data...
-				var htmlText = "<div class='featureInfoContent'><img src='geomapping/images/ajax-loader.gif' alt='loading'/>&nbsp;Loading please wait...</div>";
+				var htmlText = "<div class='featureInfoContent'><img src='geoviewer/images/ajax-loader.gif' alt='loading'/>&nbsp;Loading please wait...</div>";
 
 				// initiate a new popup
 				popup = new OpenLayers.Popup("Information", 

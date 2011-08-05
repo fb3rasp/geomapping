@@ -13,7 +13,7 @@ div.olMap {
 }
 
 .initmap {
-	background-image: url('../../geomapping/images/ajax-loader.gif');
+	background-image: url('../../geoviewer/images/ajax-loader.gif');
 	background-repeat:no-repeat;
 	background-position: center center;
 	background-color: #ddd;	
