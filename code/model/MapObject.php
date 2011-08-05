@@ -23,6 +23,7 @@ class MapObject extends DataObject {
 		"ZoomLevel" => "Int",
 		
 		'Resolutions' => 'Varchar(1024)',
+		'DisplayProjection' => "Enum(array('EPSG:4326','EPSG:900913'),'EPSG:4326')",
 		'Projection' => "Enum(array('EPSG:4326','EPSG:900913'),'EPSG:4326')",
 	);
 
