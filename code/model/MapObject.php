@@ -136,9 +136,9 @@ class MapObject extends DataObject {
 		
 			$style = new StyleMap();	
 			$style->Name = 'Point of Interests - Demo';
-			$style->default = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
-			$style->select = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
-			$style->temporary = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
+			$style->default = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geoviewer/images/icons/flag_blue.png" })';
+			$style->select = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geoviewer/images/icons/flag_blue.png" })';
+			$style->temporary = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geoviewer/images/icons/flag_blue.png" })';
 			$style->write();
 
 			$layers = $style->WFSLayers();

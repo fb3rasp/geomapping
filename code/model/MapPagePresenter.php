@@ -5,7 +5,7 @@
  */
 class MapPagePresenter extends ViewableData {
 
-	private $modulePath = 'geomapping';
+	private $modulePath = 'geoviewer';
 
 	function getCSSFiles() {
 		$value = array(
