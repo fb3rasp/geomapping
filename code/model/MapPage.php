@@ -20,7 +20,10 @@ class MapPage extends Page {
  */
 class MapPage_Controller extends Page_Controller {
 
-	function init() {
+	/**
+	 * Initialisation function that is run before any action on the controller is called.
+	 */
+	public function init() {
 		parent::init();
 		$this->extend('extendInit');
 	}
