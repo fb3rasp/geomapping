@@ -1,6 +1,6 @@
 var layer = null;
 
-layer = new OpenLayers.Layer.Vector("KML", {
+layer = new OpenLayers.Layer.Vector('$ID', {
 	strategies: [new OpenLayers.Strategy.Fixed()],
 	protocol: new OpenLayers.Protocol.HTTP({
 		
