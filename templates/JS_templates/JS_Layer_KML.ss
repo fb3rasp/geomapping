@@ -4,14 +4,12 @@ layer = new OpenLayers.Layer.Vector('$ID', {
 	strategies: [new OpenLayers.Strategy.Fixed()],
 	protocol: new OpenLayers.Protocol.HTTP({
 		
-		<% control kmlFile %>
-		url: "$AbsoluteURL",
+		url: "$FileName",
 		format: new OpenLayers.Format.KML({
 			extractStyles: true, 
 			extractAttributes: true,
 			maxDepth: 2
 		})
-		<% end_control %>
 	})
 });
 

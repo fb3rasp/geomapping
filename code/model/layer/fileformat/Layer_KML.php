@@ -13,6 +13,7 @@
 class Layer_KML extends Layer {
 	
 	static $db = array (
+		'URL' => 'Varchar(1024)'
 	);	
 	
 	static $has_one = array(
@@ -37,5 +38,15 @@ class Layer_KML extends Layer {
 		return $fields;
 	}	
 
+	function getFileName() {
+		$value = $this->URL;
+		
+		if (!$value) {
+			if ($this->gmlFile()) {
+				$value = $this->gmlFile()->getAbsoluteURL();
+			}
+		}
+		return $value;
+	}
 
 }
