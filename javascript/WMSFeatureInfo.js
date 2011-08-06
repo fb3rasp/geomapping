@@ -28,7 +28,6 @@ var infoControl = null;
 			},
 						
 			augmentMap: function(map) {
-			// initMap: function() {
 				var self = this;
 				this._super(map);
 				
