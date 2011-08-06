@@ -10,20 +10,21 @@
 
 			ControllerName: null,
 
-			initMap: function() {
+			augmentMap: function(map) {
+			// initMap: function() {
 				var self = this;
-				this._super();
+				this._super(map);
 				
 				this.setOLPopup(null);
 				this.setOLPopupSize( new OpenLayers.Size(350,300) );
 				
 				// when the user zooms in or out, remove the bubble.
-				this.getOLMap().events.register("movestart", this.getOLMap(), function(e) { 
+				map.events.register("movestart", map, function(e) { 
 					OpenLayers.Event.stop(e);
 					return false;
 				} );
 
-				this.getOLMap().events.register("zoomend", this.getOLMap(), function(evt) { 
+				map.events.register("zoomend", map, function(evt) { 
 					self.closePopup(evt); 
 				} );
 			},

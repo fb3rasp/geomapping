@@ -10,13 +10,14 @@
 
 			SelectedFeature: null,
 
-			initMap: function() {
+			augmentMap: function(map) {
+			// initMap: function() {
 				var self = this;
-				this._super();
+				this._super(map);
 
 				//
 				// enable all vector layers to be selectable via one controller.
-				var layers = this.getOLMap().getBy('layers','isVector',true);
+				var layers = map.getBy('layers','isVector',true);
 				this.activateLayers(layers);
 			},
 
@@ -55,7 +56,6 @@
 			 * @param the selected feature.
 			 **/
 			featureSelect: function(control, feature) {
-				
 				if(!feature.layer.options.queryable || feature.layer.options.queryable === false) return false;
 				
 				var self = this;				

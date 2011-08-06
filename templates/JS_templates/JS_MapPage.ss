@@ -6,7 +6,7 @@
 			ControllerName: 'Feature', 
 			<% control Map %>
  			MapID: '$ID', 
-			
+
 			Resolutions : $GetResolutionsAsJSON,
 			
 			DisplayProjection : new OpenLayers.Projection('$DisplayProjection'),
