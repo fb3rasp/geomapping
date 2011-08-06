@@ -37,10 +37,13 @@ class MapPage_Controller extends Page_Controller {
 
 		if($categories) {
 			foreach($categories as $category) {
- 				$layers = $category->getEnabledLayers($layertype);
+ 				$layers = $category->getEnabledLayers($map, $layertype);
 				if ($layers->Count()) {
-					$category->layers = $layers;
-					$retValue->push($category);
+					$entry = new ArrayData( array(
+						'Category' => $category,
+						'Layers' => $layers
+					));
+					$retValue->push($entry);
 				}
 			}
 		}

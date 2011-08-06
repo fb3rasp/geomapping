@@ -49,8 +49,8 @@ class LayerCategory extends DataObject {
 	/**
 	 * @return DataObjectSet
 	 */
-	function getEnabledLayers($layertype) {
-		return $this->getComponents('Layers', '"Enabled" = 1 AND "Type" = \''.Convert::raw2sql($layertype).'\'','"Sort" ASC');
+	function getEnabledLayers($map, $layertype) {
+		return $this->getComponents('Layers', '"Enabled" = 1 AND "LayerCategoryID" = '.$this->ID.' AND "MapID" = '.(int)$map->ID.' AND "Type" = \''.Convert::raw2sql($layertype).'\'','"Sort" ASC');
 	}
 
 	/**

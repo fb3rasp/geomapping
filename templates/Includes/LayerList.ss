@@ -1,14 +1,13 @@
 
 <div id="olLayerList" class="olLayerList">
 
-	<% cached CategoriesCacheKey %> 
 	<form>
 		<% if OverlayCategories.Count %>
 		<h1 class='category'>Overlays</h1>
 		<% control OverlayCategories %>
-		<h2 class='category'>$TitleNice</h2>
+		<h2 class='category'>$Category.TitleNice</h2>
 		<ul class='layers'>
-			<% control layers %>
+			<% control Layers %>
 			<li layer="$ID">
 				<input type='checkbox' class="" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
 				<label for="$Title.ATT">
@@ -23,9 +22,9 @@
 		<% if BackgroundCategories.Count %>
 		<h1 class='category'>Background Layers</h1>
 		<% control BackgroundCategories %>
-		<h2 class='category'>$TitleNice</h2>
+		<h2 class='category'>$Category.TitleNice</h2>
 		<ul class='layers'>
-			<% control layers %>
+			<% control Layers %>
 			<li layer="$ID">
 				<input type='checkbox' class="" name='layers' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
 				<label for="$Title.ATT">
@@ -40,9 +39,9 @@
 		<% if ContextualCategories.Count %>
 		<h1 class='category'>Contextual Layers</h1>
 		<% control ContextualCategories %>
-		<h2 class='category'>$TitleNice</h2>
+		<h2 class='category'>$Category.TitleNice</h2>
 		<ul class='layers'>
-			<% control layers %>
+			<% control Layers %>
 			<li layer="$ID">
 				<input type='radio' class="" name='baselayer' value='$Title' <% if Visible %>checked='checked'<% end_if %> />
 				<label for="$Title.ATT">
@@ -54,6 +53,7 @@
 		<% end_control %>
 		<% end_if %>		
 	</form>
+	<% cached CategoriesCacheKey %> 
 	<% end_cached %>
 
 </div>
