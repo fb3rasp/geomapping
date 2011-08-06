@@ -42,8 +42,8 @@ class Layer_KML extends Layer {
 		$value = $this->URL;
 		
 		if (!$value) {
-			if ($this->gmlFile()) {
-				$value = $this->gmlFile()->getAbsoluteURL();
+			if ($this->kmlFile()) {
+				$value = $this->kmlFile()->getAbsoluteURL();
 			}
 		}
 		return $value;
