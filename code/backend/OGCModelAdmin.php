@@ -23,6 +23,7 @@ class OGCModelAdmin extends ModelAdmin {
 		"StorageGeoserver",
 		"Layer_GeoserverWMS",
 		"Layer_GeoserverWFS",
+		"Layer_KML",
 		"StyleMap",
 	);
 
