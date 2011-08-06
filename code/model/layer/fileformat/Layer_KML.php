@@ -31,6 +31,9 @@ class Layer_KML extends Layer {
 		$fields = parent::getCMSFields($params);
 				
 		$fields->addFieldToTab('Root.KML', new FileIFrameField('kmlFile','KML File'));
+
+		$fields->removeFieldFromTab("Root.FeatureTypes", "FeatureTypes");
+		$fields->removeFieldFromTab("Root", "FeatureTypes");
 		return $fields;
 	}	
 
