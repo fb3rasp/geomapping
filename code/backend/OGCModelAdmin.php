@@ -24,6 +24,7 @@ class OGCModelAdmin extends ModelAdmin {
 		"Layer_GeoserverWMS",
 		"Layer_GeoserverWFS",
 		"Layer_KML",
+		"Layer_GML",
 		"StyleMap",
 	);
 
