@@ -15,8 +15,6 @@ class MapObject extends DataObject {
 
 	static $create_demo_map = true;
 
-	static $module_path = 'geomapping';
-
 	static $db = array(
 		"Title" => "Varchar(255)",
 		"Enabled" => "Boolean",
@@ -25,6 +23,7 @@ class MapObject extends DataObject {
 		"ZoomLevel" => "Int",
 		
 		'Resolutions' => 'Varchar(1024)',
+		'DisplayProjection' => "Enum(array('EPSG:4326','EPSG:900913'),'EPSG:4326')",
 		'Projection' => "Enum(array('EPSG:4326','EPSG:900913'),'EPSG:4326')",
 	);
 
@@ -38,14 +37,6 @@ class MapObject extends DataObject {
 
 	static function get_create_demo_map() {
 		return self::$create_demo_map;
-	}
-
-	static function set_module_path($value) {
-		self::$module_path = $value;
-	}
-
-	static function get_module_path() {
-		return self::$module_path;
 	}
 
 	function getCMSFields() {
@@ -107,6 +98,7 @@ class MapObject extends DataObject {
 			$map->Long = -74;
 			$map->ZoomLevel = 13;
 			$map->Resolutions = "0.703125, 0.3515625, 0.17578125, 0.087890625, 0.0439453125, 0.02197265625, 0.010986328125, 0.0054931640625, 0.00274658203125, 0.001373291015625, 6.866455078125E-4, 3.4332275390625E-4, 1.71661376953125E-4, 8.58306884765625E-5, 4.291534423828125E-5, 2.1457672119140625E-5, 1.0728836059570312E-5, 5.364418029785156E-6, 2.682209014892578E-6, 1.341104507446289E-6, 6.705522537231445E-7, 3.3527612686157227E-7, 1.6763806343078613E-7, 8.381903171539307E-8, 4.190951585769653E-8, 2.0954757928848267E-8, 1.0477378964424133E-8, 5.238689482212067E-9, 2.6193447411060333E-9, 1.3096723705530167E-9, 6.548361852765083E-10";
+			$map->DisplayProjection = "EPSG:4326";
 			$map->Projection = "EPSG:4326";
 			$map->write();
 		
@@ -134,6 +126,7 @@ class MapObject extends DataObject {
 			$layer->Title = 'New York - Point of Interests - Demo';
 			$layer->Enabled = true;
 			$layer->Visible = true;
+			$layer->Queryable = true;
 			$layer->Sort = 500;
 			$layer->Namespace = 'tiger';
 			$layer->FeatureType = 'poi';
@@ -145,9 +138,9 @@ class MapObject extends DataObject {
 		
 			$style = new StyleMap();	
 			$style->Name = 'Point of Interests - Demo';
-			$style->default = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
-			$style->select = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
-			$style->temporary = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geomapping/images/icons/flag_blue.png" })';
+			$style->default = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geoviewer/images/icons/flag_blue.png" })';
+			$style->select = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geoviewer/images/icons/flag_red.png" })';
+			$style->temporary = 'new OpenLayers.Style({ pointRadius: 16, externalGraphic: "geoviewer/images/icons/flag_red.png" })';
 			$style->write();
 
 			$layers = $style->WFSLayers();
@@ -168,6 +161,7 @@ class MapObject extends DataObject {
 			$map->Long = -8237950.5056889;
 			$map->ZoomLevel = 14;
 			$map->Resolutions = "156543.03390625, 78271.516953125, 39135.7584765625, 19567.87923828125, 9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033, 9.554628534317017, 4.777314267158508, 2.388657133579254, 1.194328566789627, 0.5971642833948135, 0.29858214169740677, 0.14929107084870338, 0.07464553542435169, 0.037322767712175846, 0.018661383856087923, 0.009330691928043961, 0.004665345964021981";
+			$map->DisplayProjection = "EPSG:900913";
 			$map->Projection = "EPSG:900913";
 			$map->write();
 
@@ -186,6 +180,7 @@ class MapObject extends DataObject {
 			$layer->Title = 'Google Maps - New York - Point of Interests';
 			$layer->Enabled = true;
 			$layer->Visible = true;
+			$layer->Queryable = true;
 			$layer->Sort = 500;
 			$layer->Namespace = 'tiger';
 			$layer->FeatureType = 'poi';

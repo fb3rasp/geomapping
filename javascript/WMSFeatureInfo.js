@@ -27,9 +27,9 @@ var infoControl = null;
 				return list;				
 			},
 						
-			initMap: function() {
+			augmentMap: function(map) {
 				var self = this;
-				this._super();
+				this._super(map);
 				
 				this.attachPopup();
 			},

@@ -33,7 +33,8 @@ class FeatureTypeAdmin extends ModelAdmin {
 	 */
 	public function init() {
 		parent::init();
-		Requirements::javascript(MapObject::get_module_path().'/javascript/backend/FeatureType.js');
+		$presenter = singleton(MapControllerExtension::get_map_presenter_class());	
+		Requirements::javascript($presenter->getModulePath().'/javascript/backend/FeatureType.js');
 	}	
 }
 

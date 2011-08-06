@@ -19,9 +19,12 @@ class OGCModelAdmin extends ModelAdmin {
 
 	static $managed_models = array(
 		"Layer_GoogleMap",
+		"Layer_OpenStreetMap",
 		"StorageGeoserver",
 		"Layer_GeoserverWMS",
 		"Layer_GeoserverWFS",
+		"Layer_KML",
+		"Layer_GML",
 		"StyleMap",
 	);
 

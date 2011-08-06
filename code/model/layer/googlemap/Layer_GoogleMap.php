@@ -25,7 +25,7 @@ class Layer_GoogleMap extends Layer {
 	);
 
 	public function getCMSFields($params = null) {
-		$fields = parent::getCMSFields($parents);
+		$fields = parent::getCMSFields($params);
 		
 		$fields->removeFieldFromTab("Root", "FeatureTypes");
 		$fields->removeFieldFromTab("Root.Main", "Queryable");

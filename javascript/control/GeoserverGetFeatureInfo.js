@@ -72,6 +72,14 @@ OpenLayers.Control.GeoserverGetFeatureInfo = OpenLayers.Class(OpenLayers.Control
 	    if(url1) var urlObj1 = OpenLayers.Util.createUrlObject(url1, options);
 	    if(url2) var urlObj2 = OpenLayers.Util.createUrlObject(url2, options);
 
+		if (urlObj1 == undefined) {
+			return false;
+		}
+
+		if (urlObj2 == undefined) {
+			return false;
+		}
+
 	    //compare all keys except for "args" (treated below)
 	    for(var key in urlObj1) {
 	        if(key !== "args") {

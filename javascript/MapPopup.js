@@ -10,20 +10,20 @@
 
 			ControllerName: null,
 
-			initMap: function() {
+			augmentMap: function(map) {
 				var self = this;
-				this._super();
+				this._super(map);
 				
 				this.setOLPopup(null);
 				this.setOLPopupSize( new OpenLayers.Size(350,300) );
 				
 				// when the user zooms in or out, remove the bubble.
-				this.getOLMap().events.register("movestart", this.getOLMap(), function(e) { 
+				map.events.register("movestart", map, function(e) { 
 					OpenLayers.Event.stop(e);
 					return false;
 				} );
 
-				this.getOLMap().events.register("zoomend", this.getOLMap(), function(evt) { 
+				map.events.register("zoomend", map, function(evt) { 
 					self.closePopup(evt); 
 				} );
 			},
@@ -46,7 +46,7 @@
 				}
 				
 				// popup temporary content while we load data...
-				var htmlText = "<div class='featureInfoContent'><img src='geomapping/images/ajax-loader.gif' alt='loading'/>&nbsp;Loading please wait...</div>";
+				var htmlText = "<div class='featureInfoContent'><img src='geoviewer/images/ajax-loader.gif' alt='loading'/>&nbsp;Loading please wait...</div>";
 
 				// initiate a new popup
 				popup = new OpenLayers.Popup("Information", 

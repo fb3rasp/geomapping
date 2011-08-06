@@ -10,13 +10,13 @@
 
 			SelectedFeature: null,
 
-			initMap: function() {
+			augmentMap: function(map) {
 				var self = this;
-				this._super();
+				this._super(map);
 
 				//
 				// enable all vector layers to be selectable via one controller.
-				var layers = this.getOLMap().getBy('layers','isVector',true);
+				var layers = map.getBy('layers','isVector',true);
 				this.activateLayers(layers);
 			},
 
@@ -38,7 +38,7 @@
 				var selectcontrol = new OpenLayers.Control.SelectFeature(layers, 
 					{
 						onSelect: function(feature) { return self.featureSelect(this, feature); }, 
-						onUnselect: function(feature) { return self.featureUnselect(this, feature); },
+						onUnselect: function(feature) { return self.featureUnselect(this, feature); }
 					}
 				);
 
@@ -55,7 +55,6 @@
 			 * @param the selected feature.
 			 **/
 			featureSelect: function(control, feature) {
-				
 				if(!feature.layer.options.queryable || feature.layer.options.queryable === false) return false;
 				
 				var self = this;				
